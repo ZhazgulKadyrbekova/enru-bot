@@ -9,6 +9,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="org.ancoron.postgresql:org.postgresql:9.1.901.jdbc4.1-rc9" level="project" />
     <orderEntry type="library" name="Maven: org.telegram:telegrambots:4.9.1" level="project" />
     <orderEntry type="library" name="Maven: org.telegram:telegrambots-meta:4.9.1" level="project" />
     <orderEntry type="library" name="Maven: com.google.inject:guice:4.2.2" level="project" />
@@ -62,5 +63,7 @@
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.5" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-log4j12:1.7.5" level="project" />
     <orderEntry type="library" name="Maven: log4j:log4j:1.2.17" level="project" />
+    <orderEntry type="library" name="Maven: mysql:mysql-connector-java:8.0.22" level="project" />
+    <orderEntry type="library" name="Maven: com.google.protobuf:protobuf-java:3.11.4" level="project" />
   </component>
 </module>

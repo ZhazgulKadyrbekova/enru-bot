@@ -13,5 +13,7 @@ public class MainClass {
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
+
+        System.out.println("Enruubot successfully started");
     }
 }

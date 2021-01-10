@@ -1,11 +1,15 @@
+import org.checkerframework.checker.units.qual.C;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendChatAction;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-public class Enruubot extends TelegramLongPollingBot {
+import java.sql.Date;
+import java.sql.SQLException;
 
+public class Enruubot extends TelegramLongPollingBot {
+/*
     String bil205 = "NESNE YoNELiMLi PROGRAMLAMA I\nKASIM BARIKTABASOV\nMFFB 523\n",
             bil301 = "PROGRAMLAMA DiLLERi III\nBAKIT SARSEMBAYEV\nMFFB 523",
             bil303 = "YAZILIM MuHENDiSLigi I\nCINARA CUMABAYEVA\nMFFB 524",
@@ -15,7 +19,7 @@ public class Enruubot extends TelegramLongPollingBot {
             bil311 = "YAPAY ZEKA VE UZMAN SiSTEMLER\nRAYIMBEK SULTANOV\nMFFB 523",
             bil371 = "WEB YAZILIMLARI TASARIMI\nKASIM BARIKTABASOV\nMFFB 321",
             bil373 = "GENEL AMAcLi MODELLEME SiSTEMi\nAYCARKIN SAiT KIZI\nMFFB 412";
-
+*/
     public void onUpdateReceived(Update update) {
         String command = update.getMessage().getText();
         SendMessage msg = new SendMessage();
@@ -31,21 +35,9 @@ public class Enruubot extends TelegramLongPollingBot {
                     "To finish project N\n" +
                     "25-01-2020");
         } else if (commandArray[0].equals("/add") && commandArray.length == 4) {
-            switch (commandArray[1]) {
-                case "bil205" : bil205 += "\nTask until " + commandArray[3] + " is " + commandArray[2];
-                case "bil301" : bil301 += "\nTask until " + commandArray[3] + " is " + commandArray[2];
-                case "bil303" : bil303 += "\nTask until " + commandArray[3] + " is " + commandArray[2];
-                case "bil305" : bil305 += "\nTask until " + commandArray[3] + " is " + commandArray[2];
-                case "bil307" : bil307 += "\nTask until " + commandArray[3] + " is " + commandArray[2];
-                case "bil309" : bil309 += "\nTask until " + commandArray[3] + " is " + commandArray[2];
-                case "bil311" : bil311 += "\nTask until " + commandArray[3] + " is " + commandArray[2];
-                case "bil371" : bil371 += "\nTask until " + commandArray[3] + " is " + commandArray[2];
-                case "bil373" : bil373 += "\nTask until " + commandArray[3] + " is " + commandArray[2];
-                default: result = "0";
-            }
-            if (result.equals("0")) {
-                msg.setText(commandArray[1] + " does not exist");
-            }
+            if (!ConnectionExample.updateData(commandArray[1], commandArray[2], Date.valueOf(commandArray[3])))
+                msg.setText("Command is incorrect!");
+
         } else if (commandArray[0].equals("/add")) {
             msg.setText("Please, follow this form:\n" +
                     "command:      /add\n" +
@@ -55,16 +47,16 @@ public class Enruubot extends TelegramLongPollingBot {
         } else {
             switch (command) {
                 case "/start" : msg.setText("Welcome to BM-3 bot-recorder for homeworks\nUse commands to add new and/or to see old tasks"); break;
-                //case "/add" : msg.setText("")
-                case "/bil205" : msg.setText(bil205); break;
-                case "/bil301" : msg.setText(bil301); break;
-                case "/bil303" : msg.setText(bil303); break;
-                case "/bil305" : msg.setText(bil305); break;
-                case "/bil307" : msg.setText(bil307); break;
-                case "/bil309" : msg.setText(bil309); break;
-                case "/bil311" : msg.setText(bil311); break;
-                case "/bil371" : msg.setText(bil371); break;
-                case "/bil373" : msg.setText(bil373); break;
+                case "/all" : msg.setText(ConnectionExample.getAllData()); break;
+                case "/bil205" : msg.setText(ConnectionExample.getDataByName("bil205")); break;
+                case "/bil301" : msg.setText(ConnectionExample.getDataByName("bil301")); break;
+                case "/bil303" : msg.setText(ConnectionExample.getDataByName("bil303")); break;
+                case "/bil305" : msg.setText(ConnectionExample.getDataByName("bil305")); break;
+                case "/bil307" : msg.setText(ConnectionExample.getDataByName("bil307")); break;
+                case "/bil309" : msg.setText(ConnectionExample.getDataByName("bil309")); break;
+                case "/bil311" : msg.setText(ConnectionExample.getDataByName("bil311")); break;
+                case "/bil371" : msg.setText(ConnectionExample.getDataByName("bil371")); break;
+                case "/bil373" : msg.setText(ConnectionExample.getDataByName("bil373")); break;
             }
         }
 
