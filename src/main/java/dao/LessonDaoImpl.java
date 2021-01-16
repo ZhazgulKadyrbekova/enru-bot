@@ -17,9 +17,11 @@ public class LessonDaoImpl implements LessonDao{
     public static Connection getConnection() {
 
         try {
-            return DriverManager.getConnection("jdbc:postgresql://localhost:5432/enruubot", "root", "Zxcvbnm00_");
+            return DriverManager.getConnection("jdbc:postgresql://ec2-54-156-73-147.compute-1.amazonaws.com:5432/d3hpob7gtq52vr?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory",
+                    "sehskmunuokrmc", "161453cfdaa0d1d7761e84aed166f1c8cbd5671a65b1f8d3e842330dd962632c");
         } catch (SQLException e) {
-            System.err.println("Failed to connect to db " + e.getMessage());
+            System.err.println("Failed to connect to db");
+            e.printStackTrace();
         }
         return null;
     }
