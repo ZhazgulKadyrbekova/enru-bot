@@ -1,3 +1,5 @@
+package dao;
+
 import java.sql.*;
 import java.sql.Date;
 
@@ -5,6 +7,7 @@ public class ConnectionExample {
 
     private static Connection connection = null;
     private static PreparedStatement statement = null;
+    private static final String GET_ALL_STATEMENT = "select id, name, teacher, hw, date from lessons";
 
     public static void main(String[] args) {
         try {
@@ -52,24 +55,14 @@ public class ConnectionExample {
         }
     }
 
-    private static void makeConnection() {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            return;
-        }
+    private static Connection makeConnection() {
 
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/enruubot", "root", "Zxcvbnm00_");
-
-            if (connection == null)
-                System.out.println("Failed to connect to db");
+            return DriverManager.getConnection("jdbc:postgresql://localhost:5432/enruubot", "root", "Zxcvbnm00_");
         } catch (SQLException e) {
-            System.out.println("Failed to connect to db");
-            e.printStackTrace();
-            return;
+            System.err.println("Failed to connect to db " + e.getMessage());
         }
+        return null;
     }
 
     private static void addData(String name, String teacher) {
@@ -92,7 +85,7 @@ public class ConnectionExample {
         try {
             String result = "";
             makeConnection();
-            String query = "select * from lessons where name = ?";
+            String query = "select * from public.lessons where name = ?";
 
             statement = connection.prepareStatement(query);
             statement.setString(1, name);

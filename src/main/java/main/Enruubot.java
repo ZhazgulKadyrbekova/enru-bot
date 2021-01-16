@@ -1,14 +1,21 @@
-import org.checkerframework.checker.units.qual.C;
+package main;
+
+import dao.ConnectionExample;
+import dao.LessonDao;
+import dao.LessonDaoImpl;
+import model.Lesson;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
-import org.telegram.telegrambots.meta.api.methods.send.SendChatAction;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.sql.Date;
-import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Enruubot extends TelegramLongPollingBot {
+    LessonDao lessonDao = new LessonDaoImpl();
+
 /*
     String bil205 = "NESNE YoNELiMLi PROGRAMLAMA I\nKASIM BARIKTABASOV\nMFFB 523\n",
             bil301 = "PROGRAMLAMA DiLLERi III\nBAKIT SARSEMBAYEV\nMFFB 523",
@@ -23,7 +30,6 @@ public class Enruubot extends TelegramLongPollingBot {
     public void onUpdateReceived(Update update) {
         String command = update.getMessage().getText();
         SendMessage msg = new SendMessage();
-        String result = "Done";
 
 
         String[] commandArray = command.split("\n");
@@ -32,31 +38,84 @@ public class Enruubot extends TelegramLongPollingBot {
                     "Ex:\n" +
                     "/add\n" +
                     "bil300\n" +
-                    "To finish project N\n" +
-                    "25-01-2020");
+                    "To finish project\n" +
+                    "2021-01-16");
         } else if (commandArray[0].equals("/add") && commandArray.length == 4) {
-            if (!ConnectionExample.updateData(commandArray[1], commandArray[2], Date.valueOf(commandArray[3])))
-                msg.setText("Command is incorrect!");
+            Lesson lesson = new Lesson();
+            lesson.setName(commandArray[1]);
+            lesson.setHw(commandArray[2]);
+            lesson.setDate(Date.valueOf(commandArray[3]));
+            lesson = lessonDao.update(lesson);
+            msg.setText(lesson.toString());
 
         } else if (commandArray[0].equals("/add")) {
             msg.setText("Please, follow this form:\n" +
                     "command:      /add\n" +
                     "class name:   bil300\n" +
-                    "task to do:   To finish project N1\n" +
-                    "deadline:     25-01-2020");
+                    "task to do:   To finish project\n" +
+                    "deadline:     2021-01-16");
         } else {
+            Lesson lesson;
+
             switch (command) {
                 case "/start" : msg.setText("Welcome to BM-3 bot-recorder for homeworks\nUse commands to add new and/or to see old tasks"); break;
-                case "/all" : msg.setText(ConnectionExample.getAllData()); break;
-                case "/bil205" : msg.setText(ConnectionExample.getDataByName("bil205")); break;
-                case "/bil301" : msg.setText(ConnectionExample.getDataByName("bil301")); break;
-                case "/bil303" : msg.setText(ConnectionExample.getDataByName("bil303")); break;
-                case "/bil305" : msg.setText(ConnectionExample.getDataByName("bil305")); break;
-                case "/bil307" : msg.setText(ConnectionExample.getDataByName("bil307")); break;
-                case "/bil309" : msg.setText(ConnectionExample.getDataByName("bil309")); break;
-                case "/bil311" : msg.setText(ConnectionExample.getDataByName("bil311")); break;
-                case "/bil371" : msg.setText(ConnectionExample.getDataByName("bil371")); break;
-                case "/bil373" : msg.setText(ConnectionExample.getDataByName("bil373")); break;
+                case "/all" :
+                    String res = "";
+                    List<Lesson> lessons = lessonDao.findAll();
+                    for (Lesson l : lessons) {
+                        res += l.toString();
+                    }
+                    msg.setText(res);
+                    break;
+
+                case "/bil205" :
+                    lesson = lessonDao.findByName("bil205");
+                    msg.setText(lesson.toString());
+                    break;
+
+                case "/bil301" :
+                    lesson = lessonDao.findByName("bil301");
+                    msg.setText(lesson.toString());
+                    break;
+
+                case "/bil303" :
+                    lesson = lessonDao.findByName("bil303");
+                    msg.setText(lesson.toString());
+                    break;
+
+                case "/bil305" :
+                    lesson = lessonDao.findByName("bil305");
+                    msg.setText(lesson.toString());
+                    break;
+
+                case "/bil307" :
+                    lesson = lessonDao.findByName("bil307");
+                    msg.setText(lesson.toString());
+                    break;
+
+                case "/bil309" :
+                    lesson = lessonDao.findByName("bil309");
+                    msg.setText(lesson.toString());
+                    break;
+
+                case "/bil311" :
+                    lesson = lessonDao.findByName("bil311");
+                    msg.setText(lesson.toString());
+                    break;
+
+                case "/bil371" :
+                    lesson = lessonDao.findByName("bil371");
+                    msg.setText(lesson.toString());
+                    break;
+
+                case "/bil373" :
+                    lesson = lessonDao.findByName("bil373");
+                    msg.setText(lesson.toString());
+                    break;
+
+                default:
+                    msg.setText("Invalid command");
+
             }
         }
 
