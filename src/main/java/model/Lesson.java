@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class Lesson {
 
-    private Integer id;
+    private int id;
 
     private String name;
 
@@ -15,11 +15,13 @@ public class Lesson {
 
     private Date date;
 
-    public Integer getId() {
+    private int hwId;
+
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -55,29 +57,25 @@ public class Lesson {
         this.date = date;
     }
 
+    public int getHwId() {
+        return hwId;
+    }
+
+    public void setHwId(int hwId) {
+        this.hwId = hwId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Lesson lesson = (Lesson) o;
-        return Objects.equals(id, lesson.id) && Objects.equals(name, lesson.name) && Objects.equals(teacher, lesson.teacher) && Objects.equals(hw, lesson.hw) && Objects.equals(date, lesson.date);
+        return id == lesson.id && hwId == lesson.hwId && Objects.equals(name, lesson.name) && Objects.equals(teacher, lesson.teacher) && Objects.equals(hw, lesson.hw) && Objects.equals(date, lesson.date);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, teacher, hw, date);
+        return Objects.hash(id, name, teacher, hw, date, hwId);
     }
 
-    @Override
-    public String toString() {
-        if (hw == null) {
-            return  "name:     " + name +
-                    "\nteacher:  " + teacher+
-                    "\nhw:       " + hw + "\n";
-        }
-        return  "name:     " + name +
-                "\nteacher:  " + teacher+
-                "\nhw:       " + hw +
-                "\ndate:     " + date + "\n";
-    }
 }

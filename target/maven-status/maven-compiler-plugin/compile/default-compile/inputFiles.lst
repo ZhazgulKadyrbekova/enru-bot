@@ -1,2 +1,8 @@
-/home/zhazgul/Desktop/temp/enruubot/src/main/java/Enruubot.java
-/home/zhazgul/Desktop/temp/enruubot/src/main/java/MainClass.java
+/home/zhazgul/Desktop/project/enruubot/src/main/java/model/Lesson.java
+/home/zhazgul/Desktop/project/enruubot/src/main/java/dao/LessonDao.java
+/home/zhazgul/Desktop/project/enruubot/src/main/java/main/MainClass.java
+/home/zhazgul/Desktop/project/enruubot/src/main/java/dao/LessonDaoImpl.java
+/home/zhazgul/Desktop/project/enruubot/src/main/java/main/Enruubot.java
+/home/zhazgul/Desktop/project/enruubot/src/main/java/main/Actions.java
+/home/zhazgul/Desktop/project/enruubot/src/main/java/main/Translate.java
+/home/zhazgul/Desktop/project/enruubot/src/main/java/dao/ConnectionExample.java

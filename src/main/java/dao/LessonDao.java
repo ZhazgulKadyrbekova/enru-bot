@@ -8,12 +8,16 @@ public interface LessonDao {
 
     List<Lesson> findAll();
 
-    Lesson findByName(String name);
+    List<Lesson> findByName(String name);
+
+    Lesson findHWByID(int id);
 
     Lesson save(Lesson lesson);
 
-    Lesson update(Lesson lesson);
+    List<Lesson> update(Lesson lesson);
 
-    void delete(Integer id);
+    void markDone(int id);
+
+    void delete(int id);
 
 }
